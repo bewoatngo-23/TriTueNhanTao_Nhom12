@@ -1,0 +1,62 @@
+{
+    "header": {
+        "title": "Trực Quan Hóa Thuật Toán Tìm Kiếm AI - Tìm Kiếm Theo Chiều Sâu (DFS)",
+        "subtitle": "Tải lên file đồ thị và trực quan hóa thuật toán DFS từng bước"
+    },
+    "fileUpload": {
+        "title": "Tải Lên File Đồ Thị",
+        "chooseFile": "Chọn File",
+        "uploadHint": "Tải lên file .txt chứa dữ liệu đồ thị",
+        "expectedFormat": "Định Dạng Mong Đợi:",
+        "englishFormat": "Định Dạng Tiếng Anh:",
+        "vietnameseFormat": "Định Dạng Tiếng Việt:"
+    },
+    "graphInfo": {
+        "title": "Thông Tin Đồ Thị",
+        "reset": "Đặt Lại",
+        "startNode": "Nút Bắt Đầu:",
+        "goalNode": "Nút Đích:",
+        "totalNodes": "Tổng Số Nút:",
+        "graphStructure": "Cấu Trúc Đồ Thị:",
+        "noNeighbors": "(không có nút kề)",
+        "runDFS": "Chạy Tìm Kiếm Theo Chiều Sâu",
+        "runningDFS": "Đang chạy DFS..."
+    },
+    "dfsTable": {
+        "title": "Các Bước Thực Hiện DFS",
+        "step": "Bước",
+        "currentNode": "Nút Hiện Tại",
+        "stack": "Ngăn Xếp",
+        "visited": "Đã Thăm",
+        "empty": "trống"
+    },
+    "pathDisplay": {
+        "title": "Kết Quả Tìm Kiếm",
+        "pathFound": "Tìm thấy đường đi!",
+        "noPathFound": "Không tìm thấy đường đi",
+        "pathFromTo": "Đường đi từ {{start}} đến {{goal}}:",
+        "noPathExistsFrom": "Không tồn tại đường đi từ",
+        "to": "đến",
+        "usingDFS": "bằng thuật toán Tìm Kiếm Theo Chiều Sâu.",
+        "pathLength": "Độ Dài Đường Đi:",
+        "steps": "Bước:",
+        "nodes": "nút",
+        "edges": "cạnh"
+    },
+    "errors": {
+        "error": "Lỗi",
+        "goalNotSpecified": "Chưa chỉ định nút đích",
+        "startNotSpecified": "Chưa chỉ định nút bắt đầu",
+        "goalNotFound": "Không tìm thấy nút đích '{{goal}}' trong đồ thị",
+        "startNotFound": "Không tìm thấy nút bắt đầu '{{start}}' trong đồ thị",
+        "graphEmpty": "Đồ thị trống hoặc không hợp lệ",
+        "invalidFile": "Vui lòng chọn file .txt hợp lệ"
+    },
+    "footer": {
+        "text": "Xây dựng với React & Tailwind CSS | Công Cụ Trực Quan Hóa DFS"
+    },
+    "language": {
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt"
+    }
+}

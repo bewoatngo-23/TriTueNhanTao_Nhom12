@@ -1,0 +1,62 @@
+{
+    "header": {
+        "title": "AI Search Visualization - Depth First Search (DFS)",
+        "subtitle": "Upload a graph file and visualize the DFS algorithm step by step"
+    },
+    "fileUpload": {
+        "title": "Upload Graph File",
+        "chooseFile": "Choose File",
+        "uploadHint": "Upload a .txt file with graph data",
+        "expectedFormat": "Expected Format:",
+        "englishFormat": "English Format:",
+        "vietnameseFormat": "Vietnamese Format:"
+    },
+    "graphInfo": {
+        "title": "Graph Information",
+        "reset": "Reset",
+        "startNode": "Start Node:",
+        "goalNode": "Goal Node:",
+        "totalNodes": "Total Nodes:",
+        "graphStructure": "Graph Structure:",
+        "noNeighbors": "(no neighbors)",
+        "runDFS": "Run Depth-First Search",
+        "runningDFS": "Running DFS..."
+    },
+    "dfsTable": {
+        "title": "DFS Execution Steps",
+        "step": "Step",
+        "currentNode": "Current Node",
+        "stack": "Stack",
+        "visited": "Visited",
+        "empty": "empty"
+    },
+    "pathDisplay": {
+        "title": "Search Result",
+        "pathFound": "Path found!",
+        "noPathFound": "No path found",
+        "pathFromTo": "Path from {{start}} to {{goal}}:",
+        "noPathExistsFrom": "No path exists from",
+        "to": "to",
+        "usingDFS": "using Depth-First Search.",
+        "pathLength": "Path Length:",
+        "steps": "Steps:",
+        "nodes": "nodes",
+        "edges": "edges"
+    },
+    "errors": {
+        "error": "Error",
+        "goalNotSpecified": "Goal node not specified",
+        "startNotSpecified": "Start node not specified",
+        "goalNotFound": "Goal node '{{goal}}' not found in graph",
+        "startNotFound": "Start node '{{start}}' not found in graph",
+        "graphEmpty": "Graph is empty or invalid",
+        "invalidFile": "Please select a valid .txt file"
+    },
+    "footer": {
+        "text": "Built with React & Tailwind CSS | DFS Visualization Tool"
+    },
+    "language": {
+        "english": "English",
+        "vietnamese": "Vietnamese"
+    }
+}

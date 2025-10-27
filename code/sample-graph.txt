@@ -1,0 +1,11 @@
+A: B,C,D
+B: I,G
+C: F,E
+D: F
+E: G,K
+F: K
+G:
+I: G
+K:
+Start: A
+Goal: G
