@@ -42,5 +42,9 @@
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.0"
-  }
+  },
+  "description": "A single-page React application that visualizes the Depth-First Search (DFS) algorithm by reading graph data from a text file and displaying the search process step by step.",
+  "main": "debug-test.js",
+  "author": "",
+  "license": "ISC"
 }

@@ -1,7 +1,9 @@
 {
     "header": {
         "title": "Trực Quan Hóa Thuật Toán Tìm Kiếm AI - Tìm Kiếm Theo Chiều Sâu (DFS)",
-        "subtitle": "Tải lên file đồ thị và trực quan hóa thuật toán DFS từng bước"
+        "subtitle": "Tải lên file đồ thị và trực quan hóa thuật toán DFS từng bước",
+        "titleBNB": "Trực Quan Hóa Thuật Toán Tìm Kiếm AI - Bài toán Nhánh và cận",
+        "subtitleBNB": "Tải đồ thị có trọng số và chạy Branch & Bound"
     },
     "fileUpload": {
         "title": "Tải Lên File Đồ Thị",
@@ -58,5 +60,65 @@
     "language": {
         "english": "Tiếng Anh",
         "vietnamese": "Tiếng Việt"
+    },
+    "algo": {
+        "dfs": "Chạy DFS",
+        "dfsRunning": "Đang chạy DFS...",
+        "hc": "Chạy Hill Climbing",
+        "hcRunning": "Đang chạy Hill Climbing..."
+    },
+    "hc": {
+        "title": "Các bước Hill Climbing",
+        "pathTitle": "Đường đi",
+        "found": "Đã tìm thấy đích",
+        "notFound": "Không tìm thấy đích",
+        "step": "Bước",
+        "current": "Đang ở",
+        "h": "h(n)",
+        "neighbors": "Hàng xóm",
+        "chosen": "Chọn",
+        "note": "Ghi chú",
+        "note_goal": "tới đích",
+        "note_deadend": "ngõ cụt",
+        "note_progress": "tiến",
+        "note_stuck": "kẹt local maximum"
+    },
+    "graphInfo": {
+        "titleHC": "Thông tin đồ thị (Hill Climbing)",
+        "startNode": "Nút bắt đầu",
+        "goalNode": "Nút đích",
+        "totalNodes": "Tổng số nút",
+        "graphStructure": "Cấu trúc đồ thị",
+        "noNeighbors": "không có kề",
+        "reset": "Đặt lại"
+    },
+    "bnb": {
+        "title": "Nhánh và cận",
+        "run": "Chạy Branch & Bound",
+        "running": "Đang chạy Branch & Bound...",
+        "bestCost": "Chi phí tốt nhất",
+        "table": {
+            "step": "Bước",
+            "u": "Đỉnh u",
+            "g": "g(u)",
+            "neighbors": "Kề",
+            "l1": "L1 (sau sắp theo f)",
+            "l": "L",
+            "bound": "Cận (cost)",
+            "status": "Trạng thái",
+            "reached": "đạt đích"
+        }
+    },
+    "errors": {
+        "error": "Lỗi",
+        "HC_ERR_MISSING_START": "Thiếu START=",
+        "HC_ERR_MISSING_GOAL": "Thiếu GOAL=",
+        "HC_ERR_NO_NODES": "Không có đỉnh nào được khai báo",
+        "HC_ERR_START_NOT_IN_GRAPH": "START \"{{start}}\" không tồn tại trong đồ thị",
+        "HC_ERR_MISSING_H_START": "Thiếu h() cho START \"{{start}}\"",
+        "HC_ERR_MISSING_H_GOAL": "Thiếu h() cho GOAL \"{{goal}}\"",
+        "HC_ERR_NEIGHBOR_UNDECLARED": "Nút kề \"{{v}}\" từ \"{{u}}\" chưa được khai báo với h=...",
+        "HC_ERR_MISSING_H_NODE": "Thiếu h() cho nút \"{{v}}\"",
+        "HC_ERR_GENERIC": "Không thể phân tích file Hill Climbing"
     }
 }

@@ -1,7 +1,9 @@
 {
     "header": {
         "title": "AI Search Visualization - Depth First Search (DFS)",
-        "subtitle": "Upload a graph file and visualize the DFS algorithm step by step"
+        "subtitle": "Upload a graph file and visualize the DFS algorithm step by step",
+        "titleBNB": "Branch & Bound Problem",
+        "subtitleBNB": "Upload a weighted + heuristic graph and run Branch & Bound"
     },
     "fileUpload": {
         "title": "Upload Graph File",
@@ -58,5 +60,65 @@
     "language": {
         "english": "English",
         "vietnamese": "Vietnamese"
+    },
+    "algo": {
+        "dfs": "Run DFS",
+        "dfsRunning": "Running DFS...",
+        "hc": "Run Hill Climbing",
+        "hcRunning": "Running Hill Climbing..."
+    },
+    "hc": {
+        "title": "Hill Climbing Steps",
+        "pathTitle": "Path",
+        "found": "Goal found",
+        "notFound": "Goal not found",
+        "step": "Step",
+        "current": "Current",
+        "h": "h(n)",
+        "neighbors": "Neighbors",
+        "chosen": "Chosen",
+        "note": "Note",
+        "note_goal": "reached goal",
+        "note_deadend": "dead end",
+        "note_progress": "move",
+        "note_stuck": "stuck at local maximum"
+    },
+    "graphInfo": {
+        "titleHC": "Graph Info (Hill Climbing)",
+        "startNode": "Start node",
+        "goalNode": "Goal node",
+        "totalNodes": "Total nodes",
+        "graphStructure": "Graph structure",
+        "noNeighbors": "no neighbors",
+        "reset": "Reset"
+    },
+    "bnb": {
+        "title": "Branch & Bound",
+        "run": "Run Branch & Bound",
+        "running": "Running Branch & Bound...",
+        "bestCost": "Best cost",
+        "table": {
+            "step": "Step",
+            "u": "Node u",
+            "g": "g(u)",
+            "neighbors": "Neighbors",
+            "l1": "L1 (sorted by f)",
+            "l": "L",
+            "bound": "Bound (cost)",
+            "status": "Status",
+            "reached": "goal reached"
+        }
+    },
+    "errors": {
+        "error": "Error",
+        "HC_ERR_MISSING_START": "Missing START=",
+        "HC_ERR_MISSING_GOAL": "Missing GOAL=",
+        "HC_ERR_NO_NODES": "No nodes declared",
+        "HC_ERR_START_NOT_IN_GRAPH": "START \"{{start}}\" is not declared in graph",
+        "HC_ERR_MISSING_H_START": "Missing h() for START \"{{start}}\"",
+        "HC_ERR_MISSING_H_GOAL": "Missing h() for GOAL \"{{goal}}\"",
+        "HC_ERR_NEIGHBOR_UNDECLARED": "Neighbor \"{{v}}\" from \"{{u}}\" is not declared with h=...",
+        "HC_ERR_MISSING_H_NODE": "Missing h() for node \"{{v}}\"",
+        "HC_ERR_GENERIC": "Failed to parse Hill Climbing file"
     }
 }
