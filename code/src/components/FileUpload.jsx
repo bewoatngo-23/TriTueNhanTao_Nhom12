@@ -7,34 +7,28 @@ const FileUpload = ({
   mode = 'DFS',
   bnbEnPath = '/expected_BNB_en.txt',
   bnbViPath = '/expected_BNB_vn.txt',
+  hcEnPath = '/expected_HC_en.txt',
+  hcViPath = '/expected_HC_vn.txt',
 }) => {
   const { t } = useTranslation();
   const [bnbEn, setBnbEn] = useState('');
   const [bnbVi, setBnbVi] = useState('');
   const [fmtErr, setFmtErr] = useState(null);
-
+  const [hcEn, setHcEn] = useState('');
+  const [hcVi, setHcVi] = useState('');
   useEffect(() => {
-    if (mode !== 'BNB') return;
     let alive = true;
-    setFmtErr(null);
-    setBnbEn('');
-    setBnbVi('');
-    (async () => {
-      try {
-        const [enRes, viRes] = await Promise.all([fetch(bnbEnPath), fetch(bnbViPath)]);
-        if (!enRes.ok) throw new Error(`Failed to load ${bnbEnPath}`);
-        if (!viRes.ok) throw new Error(`Failed to load ${bnbViPath}`);
-        const [enTxt, viTxt] = await Promise.all([enRes.text(), viRes.text()]);
-        if (!alive) return;
-        setBnbEn(enTxt);
-        setBnbVi(viTxt);
-      } catch (e) {
-        if (!alive) return;
-        setFmtErr(e.message);
-      }
-    })();
+    const load = async (enPath, viPath, setEn, setVi) => {
+      const [enRes, viRes] = await Promise.all([fetch(enPath, { cache: 'no-store' }), fetch(viPath, { cache: 'no-store' })]);
+      const [enTxt, viTxt] = await Promise.all([enRes.text(), viRes.text()]);
+      if (!alive) return;
+      const sanitize = s => (/<html|<!DOCTYPE/i.test(s) ? '' : s);
+      setEn(sanitize(enTxt)); setVi(sanitize(viTxt));
+    };
+    if (mode === 'BNB') load(bnbEnPath, bnbViPath, setBnbEn, setBnbVi);
+    if (mode === 'HC') load(hcEnPath, hcViPath, setHcEn, setHcVi);
     return () => { alive = false; };
-  }, [mode, bnbEnPath, bnbViPath]);
+  }, [mode, bnbEnPath, bnbViPath, hcEnPath, hcViPath]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -90,7 +84,7 @@ const FileUpload = ({
             <div>
               <p className="text-xs font-semibold text-gray-700 mb-1">{t('fileUpload.englishFormat')}</p>
               <pre className="text-xs text-gray-600 font-mono">
-{`A: B,C,D
+                {`A: B,C,D
 B: I,G
 C: F,E
 D: F
@@ -106,7 +100,7 @@ Goal: G`}
             <div>
               <p className="text-xs font-semibold text-gray-700 mb-1">{t('fileUpload.vietnameseFormat')}</p>
               <pre className="text-xs text-gray-600 font-mono">
-{`A: B,C,D
+                {`A: B,C,D
 B: I,G
 C: F,E
 D: F
@@ -139,6 +133,19 @@ Trạng thái đầu: A; Trạng thái kết thúc: G`}
             </div>
           </div>
         )}
+        {mode === 'HC' && (
+          <div className="space-y-3">
+            <div>
+              <p className="text-xs font-semibold text-gray-700 mb-1">{t('fileUpload.englishFormat')}</p>
+              <pre className="text-xs text-gray-600 font-mono whitespace-pre-wrap">{hcEn || '...'}</pre>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-700 mb-1">{t('fileUpload.vietnameseFormat')}</p>
+              <pre className="text-xs text-gray-600 font-mono whitespace-pre-wrap">{hcVi || '...'}</pre>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

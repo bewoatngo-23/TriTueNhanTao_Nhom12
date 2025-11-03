@@ -3,7 +3,9 @@
         "title": "Trực Quan Hóa Thuật Toán Tìm Kiếm AI - Tìm Kiếm Theo Chiều Sâu (DFS)",
         "subtitle": "Tải lên file đồ thị và trực quan hóa thuật toán DFS từng bước",
         "titleBNB": "Trực Quan Hóa Thuật Toán Tìm Kiếm AI - Bài toán Nhánh và cận",
-        "subtitleBNB": "Tải đồ thị có trọng số và chạy Branch & Bound"
+        "subtitleBNB": "Tải đồ thị có trọng số và chạy Branch & Bound",   
+         "titleHC": "Trực Quan Hóa Hill Climbing",
+    "subtitleHC": "Tải đồ thị có heuristic và chạy Hill Climbing"
     },
     "fileUpload": {
         "title": "Tải Lên File Đồ Thị",
@@ -109,6 +111,26 @@
             "reached": "đạt đích"
         }
     },
+      "algo": {
+    "hc": "Chạy Hill Climbing",
+    "hcRunning": "Đang chạy Hill Climbing..."
+  }, "hc": {
+    "title": "Hill Climbing",
+    "table": {
+      "step": "Bước",
+      "current": "Hiện tại",
+      "h": "h(hiện tại)",
+      "neighbors": "Hàng xóm",
+      "chosen": "Chọn",
+      "note": "Ghi chú"
+    },
+    "notes": {
+      "note_goal": "Đạt đích",
+      "note_deadend": "Ngõ cụt",
+      "note_progress": "Di chuyển tới hàng xóm tốt hơn",
+      "note_stuck": "Không có hàng xóm tốt hơn — dừng"
+    }
+  },
     "errors": {
         "error": "Lỗi",
         "HC_ERR_MISSING_START": "Thiếu START=",
