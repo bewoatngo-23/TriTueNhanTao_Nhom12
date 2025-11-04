@@ -3,7 +3,9 @@
         "title": "AI Search Visualization - Depth First Search (DFS)",
         "subtitle": "Upload a graph file and visualize the DFS algorithm step by step",
         "titleBNB": "Branch & Bound Problem",
-        "subtitleBNB": "Upload a weighted + heuristic graph and run Branch & Bound"
+        "subtitleBNB": "Upload a weighted + heuristic graph and run Branch & Bound",
+        "titleHC": "Hill Climbing Visualizer",
+        "subtitleHC": "Upload a heuristic graph and run Hill Climbing"
     },
     "fileUpload": {
         "title": "Upload Graph File",
@@ -109,6 +111,26 @@
             "reached": "goal reached"
         }
     },
+    "algo": {
+        "hc": "Run Hill Climbing",
+        "hcRunning": "Running Hill Climbing..."
+    },"hc": {
+    "title": "Hill Climbing",
+    "table": {
+      "step": "Step",
+      "current": "Current",
+      "h": "h(current)",
+      "neighbors": "Neighbors",
+      "chosen": "Chosen",
+      "note": "Note"
+    },
+    "notes": {
+      "note_goal": "Goal reached",
+      "note_deadend": "Dead end",
+      "note_progress": "Move to a better neighbor",
+      "note_stuck": "No better neighbor — stop"
+    }
+  },
     "errors": {
         "error": "Error",
         "HC_ERR_MISSING_START": "Missing START=",
