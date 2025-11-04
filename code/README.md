@@ -24,7 +24,7 @@ A single-page React application that visualizes the Depth-First Search (DFS) alg
 
 1. **Install Dependencies**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 2. **Start Development Server**

@@ -24,7 +24,7 @@
 
 1. **Cài Đặt Dependencies**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 2. **Khởi Động Server Phát Triển**
