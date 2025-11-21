@@ -1,0 +1,13 @@
+START=A
+GOAL=B
+
+A: C, D, E | h=20
+B: G       | h=0
+C: F       | h=15
+D: F, I    | h=6
+E: G, K    | h=7
+F: B       | h=10
+G: B, H    | h=5
+H: G       | h=3
+I: G       | h=8
+K:         | h=12
