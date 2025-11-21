@@ -25,8 +25,8 @@ export default function HCTable({ steps, isLoading }) {
               
               {/* Đã sửa tiêu đề ở đây */}
               <th className="px-3 py-2 border-b text-left">Trạng thái kề</th>
-              <th className="px-3 py-2 border-b text-left font-bold text-blue-600">Danh sách L1</th>
-              <th className="px-3 py-2 border-b text-left font-bold text-green-600">Danh sách L</th>
+              <th className="px-3 py-2 border-b text-left font-bold text-blue-600">L1</th>
+              <th className="px-3 py-2 border-b text-left font-bold text-green-600">L</th>
               
               <th className="px-3 py-2 border-b text-left">Chọn</th>
               <th className="px-3 py-2 border-b text-left">Ghi chú</th>

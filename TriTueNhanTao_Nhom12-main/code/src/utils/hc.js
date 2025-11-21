@@ -56,8 +56,7 @@ export function parseGraphHC(text) {
 }
 
 /**
- * THUẬT TOÁN: A -> D -> I -> B
- * Logic: L = L1(sorted) + L_old.
+ 
  * QUAN TRỌNG: Không sắp xếp lại toàn bộ L sau khi hợp nhất.
  */
 export function runHillClimbing(graph, h, start, goal) {
@@ -73,11 +72,11 @@ export function runHillClimbing(graph, h, start, goal) {
         // Lưu trạng thái L trước khi lấy phần tử đầu
         const open_before_step = open.map(n => `${n.node}-${n.h}`);
 
-        // 2.2. Loại trạng thái u ở ĐẦU danh sách L (Luôn lấy đầu, không sort lại)
+        // Loại trạng thái u ở ĐẦU danh sách L (Luôn lấy đầu, không sort lại)
         const current = open.shift();
         const u = current.node;
         
-        // 2.3. Kiểm tra mục tiêu
+        // Kiểm tra mục tiêu
         if (u === goal) {
             const path = [];
             let curr = goal;
@@ -107,12 +106,12 @@ export function runHillClimbing(graph, h, start, goal) {
         // Nếu h bằng nhau, xếp theo alphabet
         L1_temp.sort((a, b) => a.h - b.h || String(a.node).localeCompare(String(b.node)));
 
-        // 2.5. Hợp nhất: L = L1_temp (đã sắp xếp) + L_old
+        //  Hợp nhất: L = L1_temp (đã sắp xếp) + L_old
         // Đặt L1 lên đầu danh sách.
         open = [...L1_temp, ...open]; 
         
         // QUAN TRỌNG: KHÔNG SẮP XẾP LẠI `open` Ở ĐÂY.
-        // Điều này đảm bảo I-8 (ở đầu L1) vẫn đứng trước E-7 (ở trong L cũ).
+    
 
         const open_after_display = open.map(n => `${n.node}-${n.h}`);
 
