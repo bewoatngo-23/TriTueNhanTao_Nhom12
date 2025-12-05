@@ -33,10 +33,16 @@ const DFSTable = ({ steps, isLoading }) => {
                                 {t('dfsTable.currentNode')}
                             </th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {t('dfsTable.neighbors')}
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 {t('dfsTable.stack')}
                             </th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 {t('dfsTable.visited')}
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {t('dfsTable.status')}
                             </th>
                         </tr>
                     </thead>
@@ -50,6 +56,22 @@ const DFSTable = ({ steps, isLoading }) => {
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
                                         {step.current}
                                     </span>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <div className="flex flex-wrap gap-1">
+                                        {step.neighbors && step.neighbors.length > 0 ? (
+                                            step.neighbors.map((node, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800"
+                                                >
+                                                    {node}
+                                                </span>
+                                            ))
+                                        ) : (
+                                            <span className="text-gray-400 italic">{t('dfsTable.empty')}</span>
+                                        )}
+                                    </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <div className="flex flex-wrap gap-1">
@@ -78,6 +100,13 @@ const DFSTable = ({ steps, isLoading }) => {
                                             </span>
                                         ))}
                                     </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {step.isGoal ? (
+                                        <span className="text-green-600 font-semibold">{t('dfsTable.goalReached')}</span>
+                                    ) : (
+                                        <span>{t('dfsTable.exploring')}</span>
+                                    )}
                                 </td>
                             </tr>
                         ))}

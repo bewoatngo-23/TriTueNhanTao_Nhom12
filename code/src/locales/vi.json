@@ -17,6 +17,7 @@
     },
     "graphInfo": {
         "title": "Thông Tin Đồ Thị",
+        "titleHC": "Thông tin đồ thị (Hill Climbing)",
         "reset": "Đặt Lại",
         "startNode": "Nút Bắt Đầu:",
         "goalNode": "Nút Đích:",
@@ -29,10 +30,14 @@
     "dfsTable": {
         "title": "Các Bước Thực Hiện DFS",
         "step": "Bước",
-        "currentNode": "Nút Hiện Tại",
-        "stack": "Ngăn Xếp",
+        "currentNode": "Phát triển TT",
+        "neighbors": "Trạng thái kế",
+        "stack": "Danh sách L",
         "visited": "Đã Thăm",
-        "empty": "trống"
+        "status": "Trạng thái",
+        "empty": "trống",
+        "goalReached": "TTKT-DỪNG",
+        "exploring": "Đang khám phá"
     },
     "pathDisplay": {
         "title": "Kết Quả Tìm Kiếm",
@@ -46,15 +51,6 @@
         "steps": "Bước:",
         "nodes": "nút",
         "edges": "cạnh"
-    },
-    "errors": {
-        "error": "Lỗi",
-        "goalNotSpecified": "Chưa chỉ định nút đích",
-        "startNotSpecified": "Chưa chỉ định nút bắt đầu",
-        "goalNotFound": "Không tìm thấy nút đích '{{goal}}' trong đồ thị",
-        "startNotFound": "Không tìm thấy nút bắt đầu '{{start}}' trong đồ thị",
-        "graphEmpty": "Đồ thị trống hoặc không hợp lệ",
-        "invalidFile": "Vui lòng chọn file .txt hợp lệ"
     },
     "footer": {
         "text": "Xây dựng với React & Tailwind CSS | Công Cụ Trực Quan Hóa DFS"
@@ -70,29 +66,30 @@
         "hcRunning": "Đang chạy Hill Climbing..."
     },
     "hc": {
-        "title": "Các bước Hill Climbing",
+        "title": "Hill Climbing",
         "pathTitle": "Đường đi",
         "found": "Đã tìm thấy đích",
         "notFound": "Không tìm thấy đích",
         "step": "Bước",
-        "current": "Đang ở",
+        "current": "Hiện tại",
         "h": "h(n)",
         "neighbors": "Hàng xóm",
         "chosen": "Chọn",
         "note": "Ghi chú",
-        "note_goal": "tới đích",
-        "note_deadend": "ngõ cụt",
-        "note_progress": "tiến",
-        "note_stuck": "kẹt local maximum"
-    },
-    "graphInfo": {
-        "titleHC": "Thông tin đồ thị (Hill Climbing)",
-        "startNode": "Nút bắt đầu",
-        "goalNode": "Nút đích",
-        "totalNodes": "Tổng số nút",
-        "graphStructure": "Cấu trúc đồ thị",
-        "noNeighbors": "không có kề",
-        "reset": "Đặt lại"
+        "table": {
+            "step": "Bước",
+            "current": "Hiện tại",
+            "h": "h(hiện tại)",
+            "neighbors": "Hàng xóm",
+            "chosen": "Chọn",
+            "note": "Ghi chú"
+        },
+        "notes": {
+            "note_goal": "Đạt đích",
+            "note_deadend": "Ngõ cụt",
+            "note_progress": "Di chuyển tới hàng xóm tốt hơn",
+            "note_stuck": "Không có hàng xóm tốt hơn — dừng"
+        }
     },
     "bnb": {
         "title": "Nhánh và cận",
@@ -111,29 +108,14 @@
             "reached": "đạt đích"
         }
     },
-    "algo": {
-        "hc": "Chạy Hill Climbing",
-        "hcRunning": "Đang chạy Hill Climbing..."
-    },
-    "hc": {
-        "title": "Hill Climbing",
-        "table": {
-            "step": "Bước",
-            "current": "Hiện tại",
-            "h": "h(hiện tại)",
-            "neighbors": "Hàng xóm",
-            "chosen": "Chọn",
-            "note": "Ghi chú"
-        },
-        "notes": {
-            "note_goal": "Đạt đích",
-            "note_deadend": "Ngõ cụt",
-            "note_progress": "Di chuyển tới hàng xóm tốt hơn",
-            "note_stuck": "Không có hàng xóm tốt hơn — dừng"
-        }
-    },
     "errors": {
         "error": "Lỗi",
+        "goalNotSpecified": "Chưa chỉ định nút đích",
+        "startNotSpecified": "Chưa chỉ định nút bắt đầu",
+        "goalNotFound": "Không tìm thấy nút đích '{{goal}}' trong đồ thị",
+        "startNotFound": "Không tìm thấy nút bắt đầu '{{start}}' trong đồ thị",
+        "graphEmpty": "Đồ thị trống hoặc không hợp lệ",
+        "invalidFile": "Vui lòng chọn file .txt hợp lệ",
         "HC_ERR_MISSING_START": "Thiếu START=",
         "HC_ERR_MISSING_GOAL": "Thiếu GOAL=",
         "HC_ERR_NO_NODES": "Không có đỉnh nào được khai báo",

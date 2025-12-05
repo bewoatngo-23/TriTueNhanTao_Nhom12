@@ -17,6 +17,7 @@
     },
     "graphInfo": {
         "title": "Graph Information",
+        "titleHC": "Graph Info (Hill Climbing)",
         "reset": "Reset",
         "startNode": "Start Node:",
         "goalNode": "Goal Node:",
@@ -30,9 +31,13 @@
         "title": "DFS Execution Steps",
         "step": "Step",
         "currentNode": "Current Node",
-        "stack": "Stack",
+        "neighbors": "Neighbors",
+        "stack": "Stack (L)",
         "visited": "Visited",
-        "empty": "empty"
+        "status": "Status",
+        "empty": "empty",
+        "goalReached": "GOAL REACHED",
+        "exploring": "Exploring"
     },
     "pathDisplay": {
         "title": "Search Result",
@@ -46,15 +51,6 @@
         "steps": "Steps:",
         "nodes": "nodes",
         "edges": "edges"
-    },
-    "errors": {
-        "error": "Error",
-        "goalNotSpecified": "Goal node not specified",
-        "startNotSpecified": "Start node not specified",
-        "goalNotFound": "Goal node '{{goal}}' not found in graph",
-        "startNotFound": "Start node '{{start}}' not found in graph",
-        "graphEmpty": "Graph is empty or invalid",
-        "invalidFile": "Please select a valid .txt file"
     },
     "footer": {
         "text": "Built with React & Tailwind CSS | DFS Visualization Tool"
@@ -70,7 +66,7 @@
         "hcRunning": "Running Hill Climbing..."
     },
     "hc": {
-        "title": "Hill Climbing Steps",
+        "title": "Hill Climbing",
         "pathTitle": "Path",
         "found": "Goal found",
         "notFound": "Goal not found",
@@ -80,19 +76,20 @@
         "neighbors": "Neighbors",
         "chosen": "Chosen",
         "note": "Note",
-        "note_goal": "reached goal",
-        "note_deadend": "dead end",
-        "note_progress": "move",
-        "note_stuck": "stuck at local maximum"
-    },
-    "graphInfo": {
-        "titleHC": "Graph Info (Hill Climbing)",
-        "startNode": "Start node",
-        "goalNode": "Goal node",
-        "totalNodes": "Total nodes",
-        "graphStructure": "Graph structure",
-        "noNeighbors": "no neighbors",
-        "reset": "Reset"
+        "table": {
+            "step": "Step",
+            "current": "Current",
+            "h": "h(current)",
+            "neighbors": "Neighbors",
+            "chosen": "Chosen",
+            "note": "Note"
+        },
+        "notes": {
+            "note_goal": "Goal reached",
+            "note_deadend": "Dead end",
+            "note_progress": "Move to a better neighbor",
+            "note_stuck": "No better neighbor — stop"
+        }
     },
     "bnb": {
         "title": "Branch & Bound",
@@ -111,29 +108,14 @@
             "reached": "goal reached"
         }
     },
-    "algo": {
-        "hc": "Run Hill Climbing",
-        "hcRunning": "Running Hill Climbing..."
-    },
-    "hc": {
-        "title": "Hill Climbing",
-        "table": {
-            "step": "Step",
-            "current": "Current",
-            "h": "h(current)",
-            "neighbors": "Neighbors",
-            "chosen": "Chosen",
-            "note": "Note"
-        },
-        "notes": {
-            "note_goal": "Goal reached",
-            "note_deadend": "Dead end",
-            "note_progress": "Move to a better neighbor",
-            "note_stuck": "No better neighbor — stop"
-        }
-    },
     "errors": {
         "error": "Error",
+        "goalNotSpecified": "Goal node not specified",
+        "startNotSpecified": "Start node not specified",
+        "goalNotFound": "Goal node '{{goal}}' not found in graph",
+        "startNotFound": "Start node '{{start}}' not found in graph",
+        "graphEmpty": "Graph is empty or invalid",
+        "invalidFile": "Please select a valid .txt file",
         "HC_ERR_MISSING_START": "Missing START=",
         "HC_ERR_MISSING_GOAL": "Missing GOAL=",
         "HC_ERR_NO_NODES": "No nodes declared",
