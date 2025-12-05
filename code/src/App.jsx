@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import FileUpload from './components/FileUpload';
 import DFSTable from './components/DFSTable';
 import BNBTable from './components/BNBTable';
-import HCTable from './components/HCTable';       
+import HCTable from './components/HCTable';
 import PathDisplay from './components/PathDisplay';
 import LanguageSwitcher from './components/LanguageSwitcher';
 
@@ -49,8 +49,8 @@ function App() {
     setMode(next);
     // reset toàn bộ khi đổi tab
     setGraphData(null); setDfsResults(null);
-    setBnbData(null);   setBnbResults(null);
-    setHcData(null);    setHcResults(null);
+    setBnbData(null); setBnbResults(null);
+    setHcData(null); setHcResults(null);
     setError(null);
   };
 
@@ -122,8 +122,8 @@ Debug Info:
 
   const resetAll = () => {
     setGraphData(null); setDfsResults(null);
-    setBnbData(null);   setBnbResults(null);
-    setHcData(null);    setHcResults(null);
+    setBnbData(null); setBnbResults(null);
+    setHcData(null); setHcResults(null);
     setError(null);
   };
 
@@ -134,12 +134,12 @@ Debug Info:
 
   const headerTitle =
     mode === 'DFS' ? t('header.title') :
-    mode === 'BNB' ? t('header.titleBNB') :
-                     t('header.titleHC');
+      mode === 'BNB' ? t('header.titleBNB') :
+        t('header.titleHC');
   const headerSubtitle =
     mode === 'DFS' ? t('header.subtitle') :
-    mode === 'BNB' ? t('header.subtitleBNB') :
-                     t('header.subtitleHC');
+      mode === 'BNB' ? t('header.subtitleBNB') :
+        t('header.subtitleHC');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -147,12 +147,15 @@ Debug Info:
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
-            <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">{headerTitle}</h1>
-                <p className="mt-2 text-sm text-gray-600">{headerSubtitle}</p>
-              </div>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-lg font-semibold text-primary-600 bg-primary-50 px-4 py-2 rounded-lg">
+                Nhóm 12
+              </span>
               <LanguageSwitcher />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">{headerTitle}</h1>
+              <p className="mt-2 text-sm text-gray-600">{headerSubtitle}</p>
             </div>
 
             {/* Tabs */}
@@ -427,7 +430,10 @@ Debug Info:
       {/* Footer */}
       <footer className="bg-white border-t mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-gray-500">{t('footer.text')}</p>
+          <div className="text-center">
+            <p className="text-sm font-semibold text-primary-600 mb-2">Nhóm 12</p>
+            <p className="text-sm text-gray-500">{t('footer.text')}</p>
+          </div>
         </div>
       </footer>
     </div>
