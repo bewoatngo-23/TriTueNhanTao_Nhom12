@@ -99,12 +99,18 @@ export function runDFS(graph, start, goal) {
     let stepCount = 0;  // Đếm số bước
     let found = false;   // Cờ đánh dấu đã tìm thấy đích chưa
 
+    // stack = ["A"]       // Danh sách L
+    // visited = []        // Đã thăm
+    // parent = {}         // Lưu nút cha
+    // steps = []          // Lưu từng bước
+
     // VÒNG LẶP CHÍNH: Lặp cho đến khi stack rỗng HOẶC tìm thấy đích
     while (stack.length > 0 && !found) {
         stepCount++;
 
         // BƯỚC 2.2: Lấy nút u ở ĐẦU danh sách L (stack.pop() - LIFO)
         // ĐÂY LÀ ĐIỂM KHÁC BIỆT CHÍNH: DFS dùng POP (lấy cuối), BFS dùng SHIFT (lấy đầu)
+        // current = stack.pop() = "A"  // Lấy A ra khỏi stack
         const current = stack.pop();
 
         // Bỏ qua nếu nút này đã được thăm (tránh lặp vô hạn)
@@ -113,16 +119,29 @@ export function runDFS(graph, start, goal) {
         }
 
         // ĐÁNH DẤU ĐÃ THĂM: Thêm nút hiện tại vào tập visited
+        // visited.add("A")             // Đánh dấu A đã thăm
         visited.add(current);
 
         // Lấy danh sách các nút kề (neighbors/trạng thái kế)
+        // neighbors = graph["A"] = ["B", "C", "D"]
         const neighbors = graph[current] || [];
         const unvisitedNeighbors = neighbors.filter(n => !visited.has(n));
 
         // BƯỚC 2.3: Kiểm tra nếu u là trạng thái kết thúc
+        // isGoal = ("A" === "G") = false
         const isGoal = current === goal;
 
-        // GHI NHẬN BƯỚC THỰC HIỆN (để hiển thị lên bảng như slide thầy)
+        // GHI NHẬN BƯỚC THỰC HIỆN
+        // GHI NHẬN BƯỚC:
+        // steps.push({
+        //     step: 1,
+        //     current: "A",
+        //     neighbors: ["B", "C", "D"],
+        //     stack: [],              // Stack đang rỗng (vừa pop A ra)
+        //     visited: ["A"],
+        //     isGoal: false
+        // });
+
         steps.push({
             step: stepCount,           // Số bước
             current: current,          // Phát triển TT (nút đang xét)
@@ -142,6 +161,11 @@ export function runDFS(graph, start, goal) {
         // ĐẶT VÀO ĐẦU DANH SÁCH L (push vào stack)
         // QUAN TRỌNG: Duyệt NGƯỢC (từ cuối lên đầu) để giữ thứ tự từ trái sang phải
         // Vì stack là LIFO nên phải reverse để khi pop ra đúng thứ tự
+        // Thêm neighbors vào stack (DUYỆT NGƯỢC):
+        // for (i = 2; i >= 0; i--) {
+        //     stack.push(neighbors[i]); // D → C → B
+        // }
+
         for (let i = neighbors.length - 1; i >= 0; i--) {
             const neighbor = neighbors[i];
 
@@ -169,6 +193,10 @@ export function runDFS(graph, start, goal) {
     }
 
     // Trả về: các bước thực hiện, đường đi, và có tìm thấy hay không
+    // KẾT QUẢ SAU BƯỚC 1:
+    // stack = ["D", "C", "B"]  // B ở đỉnh stack (sẽ được pop tiếp theo)
+    // visited = ["A"]
+    // parent = { B→A, C→A, D→A }
     return { steps, path, found };
 }
 
