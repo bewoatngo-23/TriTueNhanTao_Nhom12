@@ -1,5 +1,3 @@
-// utils/hc.js
-
 function makeErr(code, ctx = {}) {
     const e = new Error(code);
     e.name = 'HCParseError';
@@ -10,16 +8,15 @@ function makeErr(code, ctx = {}) {
 
 export function parseGraphHC(text) {
     const lines = text.split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith('#'));
-    const nodeRe = /^([A-Za-z0-9_]+)\s*:\s*([^|#]*)\|\s*h\s*=\s*([+-]?\d+(?:\.\d+)?)$/i;
+    const nodeRe = /^([A-Za-z0-9_]+)\s*:\s*([^|#]*)\|\s*h\s*=\s*([+-]?\d+(?:\.\d+)?)/i;
 
     const startRes = [
-        /^START\s*=\s*([A-Za-z0-9_]+)$/i, /^Start\s*:\s*([A-Za-z0-9_]+)$/i,
-        /^Trạng\s+thái\s+đầu\s*:\s*([A-Za-z0-9_]+)$/i, /^Bắt\s+đầu\s*:\s*([A-Za-z0-9_]+)$/i
+        /START\s*=\s*([A-Za-z0-9_]+)/i, /Start\s*:\s*([A-Za-z0-9_]+)/i,
+        /Trạng\s*thái\s*đầu\s*:\s*([A-Za-z0-9_]+)/i, /Bắt\s+đầu\s*:\s*([A-Za-z0-9_]+)/i
     ];
     const goalRes = [
-        /^GOAL\s*=\s*([A-Za-z0-9_]+)$/i, /^Goal\s*:\s*([A-Za-z0-9_]+)$/i,
-        /^Trạng\s*thái\s*kết\s*thúc\s*:\s*([A-Za-z0-9_]+)$/i,
-        /^Kết\s+thúc\s*:\s*([A-Za-z0-9_]+)$/i
+        /GOAL\s*=\s*([A-Za-z0-9_]+)/i, /Goal\s*:\s*([A-Za-z0-9_]+)/i,
+        /Trạng\s*thái\s*kết\s*thúc\s*:\s*([A-Za-z0-9_]+)/i, /Kết\s+thúc\s*:\s*([A-Za-z0-9_]+)/i
     ];
 
     let start = null, goal = null;
@@ -36,8 +33,12 @@ export function parseGraphHC(text) {
             graph[u] = nbrList;
             continue;
         }
-        for (const re of startRes) { const ms = line.match(re); if (ms) { start = ms[1]; break; } }
-        for (const re of goalRes) { const mg = line.match(re); if (mg) { goal = mg[1]; break; } }
+        if (!start) {
+            for (const re of startRes) { const ms = line.match(re); if (ms) { start = ms[1]; break; } }
+        }
+        if (!goal) {
+            for (const re of goalRes) { const mg = line.match(re); if (mg) { goal = mg[1]; break; } }
+        }
     }
 
     if (!start) throw makeErr('HC_ERR_MISSING_START');
@@ -55,28 +56,28 @@ export function parseGraphHC(text) {
     return { graph, h, start, goal };
 }
 
-/**
- 
- * QUAN TRỌNG: Không sắp xếp lại toàn bộ L sau khi hợp nhất.
- */
 export function runHillClimbing(graph, h, start, goal) {
-    // Open list (L)
-    let open = [{ node: start, h: h[start] }];
-
+    let open = [{ node: start, h: h[start], order: 0 }];
+    const closed = new Set();
     const parent = new Map();
     const steps = [];
+    let orderCounter = 1;
 
-    // CHÚ Ý: Đã xóa hàm sortOpen() toàn cục vì nó làm đảo lộn thứ tự ưu tiên của L1
+    steps.push({
+        current: null,
+        h: null,
+        neighbors: [],
+        chosen: null,
+        L1: [],
+        L: [`${start}-${h[start]}`]
+    });
 
     while (open.length > 0) {
-        // Lưu trạng thái L trước khi lấy phần tử đầu
-        const open_before_step = open.map(n => `${n.node}-${n.h}`);
-
-        // Loại trạng thái u ở ĐẦU danh sách L (Luôn lấy đầu, không sort lại)
         const current = open.shift();
         const u = current.node;
+        
+        closed.add(u);
 
-        // Kiểm tra mục tiêu
         if (u === goal) {
             const path = [];
             let curr = goal;
@@ -86,32 +87,32 @@ export function runHillClimbing(graph, h, start, goal) {
             }
             path.reverse();
 
-            steps.push({ current: u, h: h[u], neighbors: [], chosen: null, L1: [], L: [], open_before: open_before_step, noteKey: 'note_goal' });
+            steps.push({
+                current: u, h: h[u],
+                neighbors: ['TTKT-DỪNG'], chosen: null, L1: [], L: []
+            });
             return { found: true, path, steps };
         }
 
-        // L1
         const neighbors = graph[u] ?? [];
         let L1_temp = [];
         let neighbors_L1_display = [];
         const L_old_for_display = [...open];
 
         for (const v of neighbors) {
-            L1_temp.push({ node: v, h: h[v] });
-            parent.set(v, u);
-            neighbors_L1_display.push(`${v}-${h[v]}`);
+            const isClosed = closed.has(v);
+            const isOpen = open.some(item => item.node === v);
+
+            if (!isClosed && !isOpen) {
+                L1_temp.push({ node: v, h: h[v], order: orderCounter++ });
+                parent.set(v, u);
+                neighbors_L1_display.push(`${v}-${h[v]}`);
+            }
         }
 
-        // CHỈ SẮP XẾP L1 (nhóm con vừa sinh ra) theo h tăng dần
-        // Nếu h bằng nhau, xếp theo alphabet
         L1_temp.sort((a, b) => a.h - b.h || String(a.node).localeCompare(String(b.node)));
 
-        //  Hợp nhất: L = L1_temp (đã sắp xếp) + L_old
-        // Đặt L1 lên đầu danh sách.
         open = [...L1_temp, ...open];
-
-        // QUAN TRỌNG: KHÔNG SẮP XẾP LẠI `open` Ở ĐÂY.
-
 
         const open_after_display = open.map(n => `${n.node}-${n.h}`);
 
@@ -119,34 +120,35 @@ export function runHillClimbing(graph, h, start, goal) {
             current: u,
             h: h[u],
             neighbors: neighbors_L1_display,
-            chosen: open[0] ? `${open[0].node}-${open[0].h}` : null, // Node đầu tiên của danh sách mới sẽ được chọn tiếp theo
+            chosen: open[0] ? `${open[0].node}-${open[0].h}` : null,
             L1: L1_temp.map(n => `${n.node}-${n.h}`),
-            L: open_after_display,
-            open_before: open_before_step,
-            noteKey: 'note_progress'
+            L: open_after_display
         });
 
-        if (steps.length > 100) return { found: false, path: [], steps, noteKey: 'note_fail_too_many_steps' };
+        if (steps.length > 100) return { found: false, path: [], steps };
     }
 
-    return { found: false, path: [], steps, noteKey: 'note_fail_empty_open_list' };
+    return { found: false, path: [], steps };
 }
 
 export function exportHCToText(steps, path, found, start, goal) {
     let output = '';
+    const safePath = path || [];
+    const safeStart = start || '?';
+    const safeGoal = goal || '?';
 
     output += '='.repeat(80) + '\n';
     output += 'KẾT QUẢ THUẬT TOÁN LEO ĐỒI (HILL CLIMBING)\n';
     output += '='.repeat(80) + '\n\n';
 
-    output += `Trạng thái đầu: ${start}\n`;
-    output += `Trạng thái kết thúc: ${goal}\n\n`;
+    output += `Trạng thái đầu: ${safeStart}\n`;
+    output += `Trạng thái kết thúc: ${safeGoal}\n\n`;
 
     output += '='.repeat(80) + '\n';
     output += 'CÁC BƯỚC THỰC HIỆN THUẬT TOÁN\n';
     output += '='.repeat(80) + '\n\n';
 
-    const maxCurrentLen = Math.max(...steps.map(s => s.current.length), 10);
+    const maxCurrentLen = Math.max(...steps.map(s => (s.current || '').length), 10);
     const maxNeighborsLen = Math.max(...steps.map(s => s.neighbors.join(', ').length), 15);
     const maxL1Len = Math.max(...steps.map(s => s.L1.join(', ').length), 15);
     const maxLLen = Math.max(...steps.map(s => s.L.join(', ').length), 15);
@@ -158,8 +160,7 @@ export function exportHCToText(steps, path, found, start, goal) {
     output += `${'TT kế'.padEnd(maxNeighborsLen)} | `;
     output += `${'L1'.padEnd(maxL1Len)} | `;
     output += `${'L'.padEnd(maxLLen)} | `;
-    output += `${'Chọn'.padEnd(maxChosenLen)} | `;
-    output += `Ghi chú\n`;
+    output += `Chọn\n`;
 
     output += '-'.repeat(6) + '-+-';
     output += '-'.repeat(maxCurrentLen) + '-+-';
@@ -167,27 +168,18 @@ export function exportHCToText(steps, path, found, start, goal) {
     output += '-'.repeat(maxNeighborsLen) + '-+-';
     output += '-'.repeat(maxL1Len) + '-+-';
     output += '-'.repeat(maxLLen) + '-+-';
-    output += '-'.repeat(maxChosenLen) + '-+-';
-    output += '-'.repeat(20) + '\n';
-
-    const noteMap = {
-        'note_goal': 'Đạt đích',
-        'note_progress': 'Di chuyển đến láng giềng tốt hơn',
-        'note_deadend': 'Ngõ cụt',
-        'note_stuck': 'Không có láng giềng tốt hơn'
-    };
+    output += '-'.repeat(maxChosenLen) + '\n';
 
     steps.forEach((step, index) => {
         const stepNum = (index + 1).toString().padEnd(6);
-        const current = step.current.padEnd(maxCurrentLen);
-        const hVal = step.h.toString().padEnd(6);
+        const current = (step.current || '').padEnd(maxCurrentLen);
+        const hVal = (step.h !== null && step.h !== undefined ? step.h.toString() : '').padEnd(6);
         const neighbors = step.neighbors.join(', ').padEnd(maxNeighborsLen);
         const l1 = step.L1.join(', ').padEnd(maxL1Len);
         const l = step.L.join(', ').padEnd(maxLLen);
         const chosen = (step.chosen || '').padEnd(maxChosenLen);
-        const note = noteMap[step.noteKey] || 'Đang khám phá';
 
-        output += `${stepNum} | ${current} | ${hVal} | ${neighbors} | ${l1} | ${l} | ${chosen} | ${note}\n`;
+        output += `${stepNum} | ${current} | ${hVal} | ${neighbors} | ${l1} | ${l} | ${chosen}\n`;
     });
 
     output += '\n' + '='.repeat(80) + '\n';
@@ -195,12 +187,12 @@ export function exportHCToText(steps, path, found, start, goal) {
     output += '='.repeat(80) + '\n\n';
 
     if (found) {
-        output += `Tìm thấy đường đi từ ${start} đến ${goal}!\n\n`;
-        output += `Đường đi: ${path.join(' => ')}\n`;
-        output += `Độ dài đường đi: ${path.length} trạng thái\n`;
+        output += `Tìm thấy đường đi từ ${safeStart} đến ${safeGoal}!\n\n`;
+        output += `Đường đi: ${safePath.join(' => ')}\n`;
+        output += `Độ dài đường đi: ${safePath.length} trạng thái\n`;
         output += `Số bước thực hiện: ${steps.length} bước\n`;
     } else {
-        output += `Không tìm thấy đường đi từ ${start} đến ${goal}!\n`;
+        output += `Không tìm thấy đường đi từ ${safeStart} đến ${safeGoal}!\n`;
     }
 
     output += '\n' + '='.repeat(80) + '\n';
