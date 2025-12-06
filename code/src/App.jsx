@@ -379,7 +379,14 @@ Debug Info:
         {/* Kết quả */}
         {mode === 'DFS' && (
           <>
-            <DFSTable steps={dfsResults?.steps} isLoading={isLoading && graphData} />
+            <DFSTable
+              steps={dfsResults?.steps}
+              isLoading={isLoading && graphData}
+              path={dfsResults?.path}
+              found={dfsResults?.found}
+              start={graphData?.start}
+              goal={graphData?.goal}
+            />
             {dfsResults && (
               <PathDisplay
                 path={dfsResults.path}
@@ -393,7 +400,15 @@ Debug Info:
 
         {mode === 'BNB' && (
           <>
-            <BNBTable steps={bnbResults?.steps} isLoading={isLoading && bnbData} />
+            <BNBTable
+              steps={bnbResults?.steps}
+              isLoading={isLoading && bnbData}
+              path={bnbResults?.path}
+              found={bnbResults?.found}
+              start={bnbData?.start}
+              goal={bnbData?.goal}
+              bestCost={bnbResults?.bestCost}
+            />
             {bnbResults && (
               <PathDisplay
                 path={bnbResults.path}
@@ -414,7 +429,14 @@ Debug Info:
 
         {mode === 'HC' && (
           <>
-            <HCTable steps={hcResults?.steps} isLoading={isLoading && hcData} />
+            <HCTable
+              steps={hcResults?.steps}
+              isLoading={isLoading && hcData}
+              path={hcResults?.path}
+              found={hcResults?.found}
+              start={hcData?.start}
+              goal={hcData?.goal}
+            />
             {hcResults && (
               <PathDisplay
                 path={hcResults.path}

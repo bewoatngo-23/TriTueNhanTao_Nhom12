@@ -37,7 +37,8 @@
         "status": "Status",
         "empty": "empty",
         "goalReached": "GOAL REACHED",
-        "exploring": "Exploring"
+        "exploring": "Exploring",
+        "exportToFile": "Export File"
     },
     "pathDisplay": {
         "title": "Search Result",
@@ -70,6 +71,7 @@
         "pathTitle": "Path",
         "found": "Goal found",
         "notFound": "Goal not found",
+        "exportToFile": "Export File",
         "step": "Step",
         "current": "Current",
         "h": "h(n)",
@@ -96,6 +98,7 @@
         "run": "Run Branch & Bound",
         "running": "Running Branch & Bound...",
         "bestCost": "Best cost",
+        "exportToFile": "Export File",
         "table": {
             "step": "Step",
             "u": "Node u",

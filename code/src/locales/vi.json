@@ -37,7 +37,8 @@
         "status": "Trạng thái",
         "empty": "trống",
         "goalReached": "TTKT-DỪNG",
-        "exploring": "Đang khám phá"
+        "exploring": "Đang khám phá",
+        "exportToFile": "Xuất File"
     },
     "pathDisplay": {
         "title": "Kết Quả Tìm Kiếm",
@@ -68,8 +69,9 @@
     "hc": {
         "title": "Hill Climbing",
         "pathTitle": "Đường đi",
-        "found": "Đã tìm thấy đích",
+        "found": "Tìm thấy đích",
         "notFound": "Không tìm thấy đích",
+        "exportToFile": "Xuất File",
         "step": "Bước",
         "current": "Hiện tại",
         "h": "h(n)",
